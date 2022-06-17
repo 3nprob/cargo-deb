@@ -830,7 +830,7 @@ impl Cargo {
                     (false, options.path_in_workspace(&source_path))
                 };
                 let target_path_str = asset_parts.next().ok_or("missing target (second array entry) for asset in Cargo.toml")?;
-                let target_path = PathBuf::from(target_path_str.replace("$arch", options.target.as_ref().ok_or("DERP")?));
+                let target_path = PathBuf::from(target_path_str.replace("$arch", options.architecture.as_ref()));
                 let chmod = u32::from_str_radix(&asset_parts.next().ok_or("missing chmod (third array entry) for asset in Cargo.toml")?, 8)
                     .map_err(|e| CargoDebError::NumParse("unable to parse chmod argument", e))?;
 
